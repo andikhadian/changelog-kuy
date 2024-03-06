@@ -1,0 +1,21 @@
+{
+  "name": "@andikhadian/changelog-kuy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create": "./index.js"
+  },
+  "keywords": [
+    "changelog",
+    "keepachangelog"
+  ],
+  "author": "Andikha Dian <andikha.dian1@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "keep-a-changelog": "2.5.3"
+  }
+}
