@@ -123,8 +123,8 @@ function createChangelog() {
 
   const [major, minor] = String(bump.version).split('.')
 
-  const rootDir = resolve(__dirname, 'changelogs/')
-  const targetFile = `${rootDir}${major}.${minor}.x.md`
+  const rootDir = resolve(__dirname, 'changelogs')
+  const targetFile = `${rootDir}/${major}.${minor}.x.md`
 
   let changelog = new Changelog(
     'Changelog',
