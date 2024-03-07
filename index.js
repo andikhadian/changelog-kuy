@@ -12,8 +12,11 @@
 const { Changelog, Release, parser } = require('keep-a-changelog')
 const fs = require('fs')
 const readline = require('readline')
+const { resolve } = require('path')
 
-const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+console.log('DIRR', __dirname)
+const packageJSON = fs.readFileSync(resolve(__dirname, 'package.json'), 'utf8')
+const { version } = JSON.parse(packageJSON)
 
 const bump = {
   version: version,
@@ -117,11 +120,11 @@ function createChangelog() {
   if (!bump.logs.length) {
     return
   }
-  const ROOT_DIR = 'changelogs/'
 
   const [major, minor] = String(bump.version).split('.')
 
-  const targetFile = `${ROOT_DIR}${major}.${minor}.x.md`
+  const rootDir = resolve(__dirname, 'changelogs/')
+  const targetFile = `${rootDir}${major}.${minor}.x.md`
 
   let changelog = new Changelog(
     'Changelog',
@@ -131,7 +134,7 @@ function createChangelog() {
   if (fs.existsSync(targetFile)) {
     changelog = parser(fs.readFileSync(targetFile, 'utf-8'))
   } else {
-    fs.mkdir(ROOT_DIR, (err) => {
+    fs.mkdir(rootDir, (err) => {
       if (err) throw new Error(`Error write file: ${err.message}`)
     })
   }
