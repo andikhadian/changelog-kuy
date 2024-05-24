@@ -128,12 +128,14 @@ function createChangelog() {
     `All notable changes to ${major}.${minor}.x version will be documented in this file.`
   )
 
-  if (fs.existsSync(targetFile)) {
-    changelog = parser(fs.readFileSync(targetFile, 'utf-8'))
-  } else {
+  if (!fs.existsSync(ROOT_DIR)) {
     fs.mkdir(ROOT_DIR, (err) => {
       if (err) throw new Error(`Error write file: ${err.message}`)
     })
+  }
+
+  if (fs.existsSync(targetFile)) {
+    changelog = parser(fs.readFileSync(targetFile, 'utf-8'))
   }
 
   const release = new Release(bump.version, bump.date)
